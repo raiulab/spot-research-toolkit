@@ -1,0 +1,155 @@
+{
+  "example_only": true,
+  "schema_version": "1.0.0",
+  "record_type": "event",
+  "id": "event:jp:13:fictional-example-2026",
+  "workflow_status": "draft",
+  "name": {
+    "ja": "記入例イベント（架空）",
+    "en": "Fictional Example Event",
+    "aliases": []
+  },
+  "location": {
+    "country_code": "JP",
+    "prefecture": {
+      "ja": "東京都",
+      "en": "Tokyo"
+    },
+    "municipality": {
+      "ja": "サンプル区",
+      "en": "Sample City"
+    },
+    "address": {
+      "ja": "架空の会場",
+      "en": null
+    },
+    "postal_code": null,
+    "coordinates": null
+  },
+  "google_maps": {
+    "url": null,
+    "place_id": null
+  },
+  "official": {
+    "website": "https://example.invalid/event",
+    "social_urls": []
+  },
+  "event_kind": "market",
+  "series_id": "event-series:jp:13:fictional-example",
+  "categories": [
+    "local-market"
+  ],
+  "tags": [
+    "example"
+  ],
+  "summary": {
+    "ja": "実在情報へ置き換えて使う架空のイベント例。",
+    "en": "A fictional event example to replace with verified information."
+  },
+  "audience_fit": {
+    "repeat_visitor_score": 3,
+    "daily_life_score": 4,
+    "tourist_density": "unknown",
+    "why": {
+      "ja": "評価理由を具体的に記入する。",
+      "en": "Describe the concrete reason for the score."
+    }
+  },
+  "access": {
+    "nearest_stations": [],
+    "transport_notes": {
+      "ja": "未確認",
+      "en": null
+    },
+    "accessibility": {
+      "ja": "未確認",
+      "en": null
+    }
+  },
+  "practical": {
+    "opening_hours": null,
+    "regular_closures": null,
+    "price": {
+      "currency": "JPY",
+      "range": null,
+      "notes": {
+        "ja": "未確認",
+        "en": null
+      }
+    },
+    "reservations": {
+      "required": null,
+      "recommended": null,
+      "method": null,
+      "notes": {
+        "ja": "未確認",
+        "en": null
+      }
+    },
+    "payment": [],
+    "language_support": [],
+    "etiquette": [],
+    "photography": {
+      "ja": "未確認",
+      "en": null
+    }
+  },
+  "schedule": {
+    "start_date": "2026-08-01",
+    "end_date": "2026-08-01",
+    "timezone": "Asia/Tokyo",
+    "times": [],
+    "recurrence_note": {
+      "ja": "次回日程を前年から推定しない。",
+      "en": "Never infer the next edition from a previous year."
+    },
+    "rain_policy": {
+      "ja": "未確認",
+      "en": null
+    },
+    "cancellation_status": "unknown"
+  },
+  "venue": {
+    "name": {
+      "ja": "架空の会場",
+      "en": null
+    },
+    "spot_id": null
+  },
+  "verification": {
+    "confidence": "low",
+    "issues": [
+      "架空の書式例であり、本番利用不可"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "src-example",
+      "url": "https://example.invalid/event",
+      "title": "架空の出典",
+      "publisher": "Example",
+      "source_type": "other",
+      "trust_level": "discovery",
+      "language": "ja",
+      "accessed_at": "2026-07-24",
+      "supports": [
+        "record-format"
+      ],
+      "evidence_note": "書式確認専用の架空URL。"
+    }
+  ],
+  "field_sources": {
+    "name.ja": [
+      "src-example"
+    ]
+  },
+  "research": {
+    "researched_at": "2026-07-24",
+    "verified_at": null,
+    "next_review_at": "2026-07-25",
+    "agent_notes": [
+      "examples配下から本番エクスポートされない"
+    ],
+    "change_notes": []
+  }
+}

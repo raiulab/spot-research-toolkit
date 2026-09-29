@@ -1,0 +1,1034 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.com/schemas/spot-research-record-1.0.0.json",
+  "title": "Spot Research record",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "record_type",
+    "id",
+    "workflow_status",
+    "name",
+    "location",
+    "categories",
+    "summary",
+    "audience_fit",
+    "practical",
+    "verification",
+    "sources",
+    "field_sources",
+    "research"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        "1.0.0",
+        "1.1.0",
+        "1.2.0"
+      ]
+    },
+    "record_type": {
+      "enum": [
+        "spot",
+        "event"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^(spot|event):jp:[a-z0-9][a-z0-9:-]*$"
+    },
+    "workflow_status": {
+      "enum": [
+        "draft",
+        "verified",
+        "published",
+        "stale",
+        "archived"
+      ]
+    },
+    "name": {
+      "type": "object",
+      "required": [
+        "ja",
+        "en",
+        "aliases"
+      ],
+      "properties": {
+        "ja": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "required": [
+        "country_code",
+        "prefecture",
+        "municipality",
+        "address",
+        "coordinates"
+      ],
+      "properties": {
+        "country_code": {
+          "const": "JP"
+        },
+        "prefecture": {
+          "$ref": "#/$defs/localizedRequired"
+        },
+        "municipality": {
+          "$ref": "#/$defs/localizedRequired"
+        },
+        "neighborhood": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "$ref": "#/$defs/localizedRequired"
+            }
+          ]
+        },
+        "address": {
+          "$ref": "#/$defs/localizedRequired"
+        },
+        "postal_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "coordinates": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "required": [
+                "lat",
+                "lng"
+              ],
+              "properties": {
+                "lat": {
+                  "type": "number",
+                  "minimum": 20,
+                  "maximum": 46
+                },
+                "lng": {
+                  "type": "number",
+                  "minimum": 122,
+                  "maximum": 154
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
+    "google_maps": {
+      "type": "object",
+      "required": [
+        "url",
+        "place_id"
+      ],
+      "properties": {
+        "url": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "place_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "search_url": {
+          "type": "string",
+          "pattern": "^https://www\\.google\\.[^/]+/maps/search/\\?api=1&query=.+"
+        },
+        "link_status": {
+          "enum": [
+            "entity-confirmed",
+            "search-only",
+            "unavailable"
+          ]
+        }
+      }
+    },
+    "review_insights": {
+      "$ref": "#/$defs/reviewInsights"
+    },
+    "official": {
+      "type": "object"
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "summary": {
+      "$ref": "#/$defs/localizedRequired"
+    },
+    "audience_fit": {
+      "type": "object",
+      "required": [
+        "repeat_visitor_score",
+        "daily_life_score",
+        "tourist_density",
+        "why"
+      ],
+      "properties": {
+        "repeat_visitor_score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "daily_life_score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "tourist_density": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "why": {
+          "$ref": "#/$defs/localizedRequired"
+        }
+      }
+    },
+    "editorial": {
+      "type": "object",
+      "properties": {
+        "why": {
+          "$ref": "#/$defs/localizedRequired"
+        },
+        "description": {
+          "$ref": "#/$defs/localizedRequired"
+        },
+        "tips": {
+          "$ref": "#/$defs/localizedRequired"
+        },
+        "walking_note": {
+          "$ref": "#/$defs/localizedRequired"
+        },
+        "cultural_note": {
+          "$ref": "#/$defs/localizedRequired"
+        }
+      }
+    },
+    "app_profile": {
+      "type": "object",
+      "required": [
+        "region",
+        "main_category",
+        "subcategories",
+        "suitable_for",
+        "selection_tier",
+        "route_role"
+      ],
+      "properties": {
+        "region": {
+          "type": "string",
+          "minLength": 1
+        },
+        "main_category": {
+          "type": "string",
+          "minLength": 1
+        },
+        "curated_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "subcategories": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "place_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "suitable_for": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "first_time",
+              "repeat",
+              "deep_dive",
+              "family-friendly"
+            ]
+          }
+        },
+        "priority_for": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "budget_tier": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "budget",
+            "mid",
+            "luxury",
+            null
+          ]
+        },
+        "selection_tier": {
+          "enum": [
+            "anchor",
+            "core",
+            "fallback"
+          ]
+        },
+        "route_role": {
+          "enum": [
+            "start",
+            "mid",
+            "end",
+            "any"
+          ]
+        },
+        "meal_slots": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "best_time": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "morning",
+            "afternoon",
+            "evening",
+            "any",
+            null
+          ]
+        },
+        "vibe": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "foreigner_friendly": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "high",
+            "medium",
+            "low",
+            null
+          ]
+        },
+        "discovery_level": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "iconic",
+            "known_local_favorite",
+            "deep_cut",
+            null
+          ]
+        },
+        "hidden_gem": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "visit_duration_minutes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "pace": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "slow",
+            "medium",
+            "active",
+            null
+          ]
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "best_months": {
+          "$ref": "#/$defs/months"
+        },
+        "avoid_months": {
+          "$ref": "#/$defs/months"
+        },
+        "weather_roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "open_by_09": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "open_after_20": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "night_slot_ok": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "access": {
+      "type": "object"
+    },
+    "practical": {
+      "type": "object"
+    },
+    "business": {
+      "$ref": "#/$defs/business"
+    },
+    "verification": {
+      "type": "object",
+      "required": [
+        "confidence",
+        "issues"
+      ],
+      "properties": {
+        "confidence": {
+          "enum": [
+            "low",
+            "medium",
+            "high"
+          ]
+        },
+        "issues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "field_sources": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "research": {
+      "type": "object",
+      "required": [
+        "researched_at",
+        "verified_at",
+        "next_review_at",
+        "agent_notes",
+        "change_notes"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "spot"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "spot_kind",
+          "experience"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "event"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "event_kind",
+          "series_id",
+          "schedule",
+          "venue"
+        ]
+      }
+    },
+    {
+      "if": {
+        "allOf": [
+          {
+            "properties": {
+              "record_type": {
+                "const": "spot"
+              },
+              "schema_version": {
+                "enum": [
+                  "1.1.0",
+                  "1.2.0"
+                ]
+              }
+            }
+          },
+          {
+            "properties": {
+              "spot_kind": {
+                "enum": [
+                  "restaurant",
+                  "cafe",
+                  "bar",
+                  "shop",
+                  "gallery"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "then": {
+        "required": [
+          "business"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "record_type": {
+            "const": "spot"
+          },
+          "schema_version": {
+            "const": "1.2.0"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "google_maps",
+          "review_insights"
+        ],
+        "properties": {
+          "google_maps": {
+            "required": [
+              "search_url",
+              "link_status"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "localizedRequired": {
+      "type": "object",
+      "required": [
+        "ja",
+        "en"
+      ],
+      "properties": {
+        "ja": {
+          "type": "string",
+          "minLength": 1
+        },
+        "en": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "months": {
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 12
+      },
+      "uniqueItems": true
+    },
+    "localizedNullable": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/localizedRequired"
+        }
+      ]
+    },
+    "reviewInsights": {
+      "type": "object",
+      "required": [
+        "status",
+        "observed_at",
+        "source_types",
+        "source_urls",
+        "sampled_review_count",
+        "summary",
+        "positive_themes",
+        "caution_themes",
+        "methodology",
+        "caveats"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "not-collected",
+            "collected",
+            "stale",
+            "unavailable"
+          ]
+        },
+        "observed_at": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "source_types": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "google-maps",
+              "booking-platform",
+              "social",
+              "other"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "source_urls": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "uniqueItems": true
+        },
+        "sampled_review_count": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "summary": {
+          "$ref": "#/$defs/localizedNullable"
+        },
+        "positive_themes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/localizedRequired"
+          }
+        },
+        "caution_themes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/localizedRequired"
+          }
+        },
+        "methodology": {
+          "$ref": "#/$defs/localizedRequired"
+        },
+        "caveats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/localizedRequired"
+          }
+        }
+      }
+    },
+    "business": {
+      "type": "object",
+      "required": [
+        "venue_type",
+        "service_modes",
+        "reservation_policy",
+        "ordering_flow",
+        "seating",
+        "takeaway",
+        "last_order",
+        "smoking_policy",
+        "menu",
+        "dietary_support",
+        "public_contact",
+        "local_context"
+      ],
+      "properties": {
+        "venue_type": {
+          "enum": [
+            "restaurant",
+            "cafe",
+            "bar",
+            "bakery",
+            "food-shop",
+            "retail",
+            "gallery",
+            "hybrid",
+            "other"
+          ]
+        },
+        "service_modes": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "dine-in",
+              "counter",
+              "table",
+              "standing",
+              "takeaway",
+              "retail",
+              "exhibition"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "reservation_policy": {
+          "enum": [
+            "not-accepted",
+            "optional",
+            "recommended",
+            "required",
+            "unknown"
+          ]
+        },
+        "ordering_flow": {
+          "$ref": "#/$defs/localizedNullable"
+        },
+        "seating": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "required": [
+                "seat_count",
+                "counter",
+                "table",
+                "private_rooms",
+                "standing",
+                "notes"
+              ],
+              "properties": {
+                "seat_count": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "minimum": 0
+                },
+                "counter": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "table": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "private_rooms": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "standing": {
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                },
+                "notes": {
+                  "$ref": "#/$defs/localizedNullable"
+                }
+              }
+            }
+          ]
+        },
+        "takeaway": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "last_order": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^([01][0-9]|2[0-4]):[0-5][0-9]$"
+        },
+        "smoking_policy": {
+          "enum": [
+            "smoke-free",
+            "separated",
+            "smoking-allowed",
+            "unknown"
+          ]
+        },
+        "menu": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "required": [
+                "official_url",
+                "languages",
+                "price_examples"
+              ],
+              "properties": {
+                "official_url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "languages": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "price_examples": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "item",
+                      "price_jpy"
+                    ],
+                    "properties": {
+                      "item": {
+                        "$ref": "#/$defs/localizedRequired"
+                      },
+                      "price_jpy": {
+                        "type": [
+                          "integer",
+                          "null"
+                        ],
+                        "minimum": 0
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "dietary_support": {
+          "oneOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "object",
+              "required": [
+                "vegetarian",
+                "vegan",
+                "halal",
+                "allergen_info_url",
+                "notes"
+              ],
+              "properties": {
+                "vegetarian": {
+                  "enum": [
+                    "available",
+                    "limited",
+                    "not-available",
+                    "unknown"
+                  ]
+                },
+                "vegan": {
+                  "enum": [
+                    "available",
+                    "limited",
+                    "not-available",
+                    "unknown"
+                  ]
+                },
+                "halal": {
+                  "enum": [
+                    "available",
+                    "limited",
+                    "not-available",
+                    "unknown"
+                  ]
+                },
+                "allergen_info_url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "notes": {
+                  "$ref": "#/$defs/localizedNullable"
+                }
+              }
+            }
+          ]
+        },
+        "public_contact": {
+          "type": "object",
+          "required": [
+            "phone",
+            "inquiry_url"
+          ],
+          "properties": {
+            "phone": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "inquiry_url": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "local_context": {
+          "$ref": "#/$defs/localizedRequired"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "url",
+        "title",
+        "publisher",
+        "source_type",
+        "trust_level",
+        "language",
+        "accessed_at",
+        "supports",
+        "evidence_note"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "url": {
+          "type": "string",
+          "pattern": "^https?://"
+        },
+        "source_type": {
+          "enum": [
+            "official",
+            "government",
+            "tourism",
+            "transport",
+            "editorial",
+            "booking",
+            "map",
+            "social",
+            "other"
+          ]
+        },
+        "trust_level": {
+          "enum": [
+            "primary",
+            "secondary",
+            "discovery"
+          ]
+        },
+        "accessed_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "supports": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

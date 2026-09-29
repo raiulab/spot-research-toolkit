@@ -1,0 +1,217 @@
+{
+  "example_only": true,
+  "schema_version": "1.0.0",
+  "record_type": "spot",
+  "id": "spot:jp:13:fictional-example",
+  "workflow_status": "draft",
+  "name": {
+    "ja": "記入例スポット（架空）",
+    "en": "Fictional Example Spot",
+    "aliases": []
+  },
+  "location": {
+    "country_code": "JP",
+    "prefecture": {
+      "ja": "東京都",
+      "en": "Tokyo"
+    },
+    "municipality": {
+      "ja": "サンプル区",
+      "en": "Sample City"
+    },
+    "neighborhood": {
+      "ja": "サンプル町",
+      "en": "Sample"
+    },
+    "address": {
+      "ja": "架空の住所",
+      "en": null
+    },
+    "postal_code": null,
+    "coordinates": null
+  },
+  "google_maps": {
+    "url": null,
+    "place_id": null
+  },
+  "official": {
+    "website": "https://example.invalid/spot",
+    "social_urls": []
+  },
+  "spot_kind": "street",
+  "categories": [
+    "neighborhood-life"
+  ],
+  "tags": [
+    "example"
+  ],
+  "summary": {
+    "ja": "実在情報へ置き換えて使う架空の書式例。",
+    "en": "A fictional formatting example to replace with verified information."
+  },
+  "audience_fit": {
+    "repeat_visitor_score": 3,
+    "daily_life_score": 4,
+    "tourist_density": "unknown",
+    "why": {
+      "ja": "評価理由を具体的に記入する。",
+      "en": "Describe the concrete reason for the score."
+    }
+  },
+  "editorial": {
+    "why": {
+      "ja": "旅程へ入れる固有の理由を記入する。",
+      "en": "State the distinctive reason to include it in an itinerary."
+    },
+    "description": {
+      "ja": "アプリ表示用の説明を記入する。",
+      "en": "Write the app-facing description."
+    },
+    "tips": {
+      "ja": "訪問時に役立つ具体的な助言を記入する。",
+      "en": "Add practical, specific advice for a visit."
+    },
+    "walking_note": {
+      "ja": "周辺散策とのつながりを記入する。",
+      "en": "Explain how it connects to the surrounding walk."
+    },
+    "cultural_note": {
+      "ja": "文化的背景を具体的に記入する。",
+      "en": "Explain the concrete cultural context."
+    }
+  },
+  "app_profile": {
+    "region": "tokyo",
+    "main_category": "food_cafe",
+    "curated_id": "tokyo-fictional-example-sample",
+    "subcategories": [
+      "Cafe / Kissaten"
+    ],
+    "place_types": [],
+    "suitable_for": [
+      "repeat",
+      "deep_dive"
+    ],
+    "priority_for": [],
+    "budget_tier": null,
+    "selection_tier": "core",
+    "route_role": "mid",
+    "meal_slots": [],
+    "best_time": null,
+    "vibe": null,
+    "foreigner_friendly": null,
+    "discovery_level": null,
+    "hidden_gem": null,
+    "visit_duration_minutes": null,
+    "pace": null,
+    "warnings": [],
+    "best_months": [],
+    "avoid_months": [],
+    "weather_roles": [],
+    "open_by_09": null,
+    "open_after_20": null,
+    "night_slot_ok": null
+  },
+  "access": {
+    "nearest_stations": [],
+    "transport_notes": {
+      "ja": "未確認",
+      "en": null
+    },
+    "accessibility": {
+      "ja": "未確認",
+      "en": null
+    }
+  },
+  "practical": {
+    "opening_hours": {
+      "raw_text": {
+        "ja": "未確認",
+        "en": null
+      },
+      "weekly": null,
+      "exceptions": [],
+      "regular_opening_hours": null,
+      "source_id": "src-example"
+    },
+    "regular_closures": {
+      "raw_text": {
+        "ja": "未確認",
+        "en": null
+      },
+      "days": [],
+      "notes": [],
+      "source_id": "src-example"
+    },
+    "price": {
+      "currency": "JPY",
+      "range": null,
+      "notes": {
+        "ja": "未確認",
+        "en": null
+      }
+    },
+    "reservations": {
+      "required": null,
+      "recommended": null,
+      "method": null,
+      "notes": {
+        "ja": "未確認",
+        "en": null
+      }
+    },
+    "payment": [],
+    "language_support": [],
+    "etiquette": [],
+    "photography": {
+      "ja": "未確認",
+      "en": null
+    }
+  },
+  "experience": {
+    "recommended_duration_minutes": null,
+    "best_time": {
+      "ja": "未確認",
+      "en": null
+    },
+    "highlights": [],
+    "nearby_pairing_ids": []
+  },
+  "food": null,
+  "verification": {
+    "confidence": "low",
+    "issues": [
+      "架空の書式例であり、本番利用不可"
+    ]
+  },
+  "sources": [
+    {
+      "source_id": "src-example",
+      "url": "https://example.invalid/spot",
+      "title": "架空の出典",
+      "publisher": "Example",
+      "source_type": "other",
+      "trust_level": "discovery",
+      "language": "ja",
+      "accessed_at": "2026-07-24",
+      "supports": [
+        "record-format"
+      ],
+      "evidence_note": "書式確認専用の架空URL。"
+    }
+  ],
+  "field_sources": {
+    "name.ja": [
+      "src-example"
+    ]
+  },
+  "research": {
+    "researched_at": "2026-07-24",
+    "verified_at": null,
+    "next_review_at": "2026-07-25",
+    "agent_notes": [
+      "examples配下から本番エクスポートされない"
+    ],
+    "change_notes": []
+  }
+}
